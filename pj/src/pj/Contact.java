@@ -9,10 +9,10 @@ public class Contact implements Comparable<Contact> {
 	private String addres;
 
 	
-	private 
+	
 	
 	public  int compareTo(Contact o) {
-		return this.name.compareToIgnoreCase(o.name);
+		return this.getName().compareTo(o.name);
 	}
 	
 	

@@ -1,5 +1,7 @@
 package pj;
 
+import java.util.Scanner;
+
 public class LinkedList <T> {
 	
 	
@@ -75,8 +77,11 @@ public void delete() {
     	
     	findFirst();
     	while (current!=null) {
-    		if(((Contact) current.getData()).geteMail().equalsIgnoreCase(email))
+    		if(((Contact) current.getData()).geteMail().equalsIgnoreCase(email)) {
     			L.add(current.data);
+    			System.out.println("Contactfound!");      
+      			
+    		}
     		current=current.next;
     			
     	}
@@ -89,8 +94,12 @@ public void delete() {
     	
     	findFirst();
     	while (current!=null) {
-    		if(((Contact) current.getData()).getAddres().equalsIgnoreCase(addres))
+    		if(((Contact) current.getData()).getAddres().equalsIgnoreCase(addres)) {
     			L.add(current.data);
+    			System.out.println("Contactfound!");      
+   			
+    		}
+    			
     		current=current.next;
     			
     	}
@@ -103,8 +112,11 @@ public void delete() {
     	
     	findFirst();
     	while (current!=null) {
-    		if(((Contact) current.getData()).getBirthday().equalsIgnoreCase(birthD))
+    		if(((Contact) current.getData()).getBirthday().equalsIgnoreCase(birthD)) {
     			L.add(current.data);
+    			System.out.println("Contactfound!");      
+   			
+    		}
     		current=current.next;
     			
     	}
@@ -118,8 +130,12 @@ public void delete() {
     	
     	findFirst();
     	while (current!=null) {
-    		if(((Contact) current.getData()).getPhoneNumber().equalsIgnoreCase(phone))
+    		if(((Contact) current.getData()).getPhoneNumber().equalsIgnoreCase(phone)) {
     			L.add(current.data);
+    			System.out.println("Contactfound!");      
+    			
+    			
+    		}
     		current=current.next;
     			
     	}
@@ -132,26 +148,16 @@ public void delete() {
     	
     	findFirst();
     	while (current!=null) {
-    		if(((Contact) current.getData()).getName().equalsIgnoreCase(name))
+    		if(((Contact) current.getData()).getName().equalsIgnoreCase(name)) {
     			L.add(current.data);
+    			System.out.println("Contactfound!");      
+   			
+    		}
     		current=current.next;
     			
     	}
     	return L;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     public boolean searchByNamePhone (String name, String phone ){
@@ -165,9 +171,56 @@ public void delete() {
     	}
     	return flag;
     }
+    
+    
+    public void search(int criteria){
+    	Scanner input = new Scanner(System.in);
+    	if(criteria==1) {
+    		 System.out.print("Enter the contact's name:");
+    		 String name = input.next();
+    		   
+    		searchByName (name);
+    	}
+    	else if(criteria==2) {
+    		 System.out.print("Enter the contact's phone number:"); 
+    		 String phoneNumber = input.next();
+    		 searchByPhoneNum (phoneNumber);
+    	}
+    	
+    	else if(criteria==3) {
+    		 System.out.print("Enter the contact's email address:"); 
+    		 String emailAddress = input.next();
+    		searchByEmail (emailAddress );
+    	}
+    	else if(criteria==4) {
+    		 System.out.print("Enter the contact's address: "); 
+    		 String address = input.next();
+    		searchByAddres (address );
+    	}
+    	else if(criteria==5) {
+    		 System.out.print("Enter the contact's birthday:"); 
+    		 String birthday = input.next();
+    		searchByBirthday (birthday);
+    	}
+    }
 
 
+    public boolean isContactUnique(Contact newContact) {
+	    Node<T> current = head;
 
+	    while (current != null) {
+	        Contact existingContact = (Contact) current.data; // Assuming Contact is the type stored in the list
+
+	        if (existingContact.getName().equalsIgnoreCase(newContact.getName()) ||
+	            existingContact.getPhoneNumber().equalsIgnoreCase(newContact.getPhoneNumber())) {
+	            return false; // A contact with the same name or phone number already exists
+	        }
+
+	        current = current.next;
+	    }
+
+	    return true; // The contact is unique
+	}
 
 	
 	
