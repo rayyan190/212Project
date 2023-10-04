@@ -35,28 +35,28 @@ public class LinkedList <T> {
 		Node <T> tmp;
 		if(empty())
 			current =head =new Node<T>(e); 
-		
-		if(!searchByNamePhone(null, null)) {
+		else {
 		 tmp =current.next;
 		 current.next=new Node<T>(e);
 		 current =current.next;
-		 current.next=tmp;  
-		 System.out.println("Contact added successfully!");
-		}
-		else {
-			 System.out.println("its already exist --->not added !!");
-
-		}
+		 current.next=tmp;}  
+		
 		
 		
 	}
 	
-public void delete() {
-		
-		
+public boolean delete(T e) {
 		if(current ==head) {
-			head=head.next;}
+			head=head.next;
+		return true;}
 		
+		while (current!=null ) {
+			if(((Contact) current.getData()).getName().equalsIgnoreCase(((Contact) e).getName())) 
+				break;
+				current=current.next;
+			
+		}
+	
 		Node <T> tmp =head;
 		while(tmp.next!=current)
 			tmp=tmp.next;
@@ -64,6 +64,7 @@ public void delete() {
 		
 		if(current.next==null)
 			current =head;
+		return true;
 					
 		
 	}
