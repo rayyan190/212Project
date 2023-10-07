@@ -2,18 +2,26 @@ package pj;
 
 public class Event {
 	
-	private String eventTitle;
+	 private String eventTitle;
 	 private String ContactName;
 	 private String dateTime;
-	    private String location;
+	 private String location;
 	 private Contact contact;
 	 
-	 public Event(String eventTitle, String contactName, String dateTime, String location, Contact contact) {
+	 public Event(String eventTitle, String ContactName, String dateTime, String location) {
 	  this.eventTitle = eventTitle;
-	  this.ContactName = contactName;
+	  this.ContactName = ContactName;
 	  this.dateTime = dateTime;
 	  this.location = location;
-	  this.contact = contact;
+	  
+	 }
+	 
+	 public Event(Event e) {
+		  this.eventTitle = e.eventTitle;
+		  this.ContactName = e.ContactName;
+		  this.dateTime = e.dateTime;
+		  this.location = e.location;
+		 
 	 }
 	 public String getEventTitle() {
 	  return eventTitle;

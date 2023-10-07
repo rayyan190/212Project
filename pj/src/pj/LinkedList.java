@@ -28,6 +28,13 @@ public class LinkedList <T> {
 	public void findNext() {
 		current=current.next;
 	}
+	public T retrieve( ) {
+		return current.data;
+
+	}
+	public void update(T e) {
+		current.data = e;
+	}
 	
 	
 	
@@ -45,7 +52,28 @@ public class LinkedList <T> {
 		
 	}
 	
-public boolean delete(T e) {
+	public void remove () {
+		if (current == head) {
+			head = head.next;
+		}
+		else {
+			Node<T> tmp = head;
+
+			while (tmp.next != current)
+				tmp = tmp.next;
+
+			tmp.next = current.next;
+		}
+
+		if (current.next == null)
+			current = head;
+		else
+			current = current.next;
+	}
+	
+	
+	
+   /* public boolean delete(T e) {
 		if(current ==head) {
 			head=head.next;
 		return true;}
@@ -67,6 +95,22 @@ public boolean delete(T e) {
 		return true;
 					
 		
+	}*/
+	
+	
+	 public void PrintContact() {
+    	 Node<T> current = head;
+    	 while (current != null) {
+	    	    System.out.println("Name:"+((Contact) current.getData()).getName()); 
+	 			System.out.println("Phone Number:"+((Contact) current.getData()).getPhoneNumber()); 
+	 			System.out.println("Email Address:"+((Contact) current.getData()).geteMail()); 
+	 			System.out.println("Address:"+((Contact) current.getData()).getAddres()); 
+	 			System.out.println("Birthday:"+((Contact) current.getData()).getBirthday()); 
+	 			System.out.println("Notes:"+((Contact) current.getData()).getNotes());
+    		 current=current.next;
+    	 }
+
+		
 	}
 
 
@@ -80,9 +124,11 @@ public boolean delete(T e) {
     	while (current!=null) {
     		if(((Contact) current.getData()).geteMail().equalsIgnoreCase(email)) {
     			L.add(current.data);
-    			System.out.println("Contactfound!");      
+    			System.out.println("Contactfound!");    
+    			PrintContact();
       			
     		}
+    		else  System.out.println("Contact not found!!");  
     		current=current.next;
     			
     	}
@@ -97,9 +143,11 @@ public boolean delete(T e) {
     	while (current!=null) {
     		if(((Contact) current.getData()).getAddres().equalsIgnoreCase(addres)) {
     			L.add(current.data);
-    			System.out.println("Contactfound!");      
+    			System.out.println("Contactfound!");  
+    			PrintContact();
    			
     		}
+    		else System.out.println("Contact not found!!");  
     			
     		current=current.next;
     			
@@ -115,9 +163,11 @@ public boolean delete(T e) {
     	while (current!=null) {
     		if(((Contact) current.getData()).getBirthday().equalsIgnoreCase(birthD)) {
     			L.add(current.data);
-    			System.out.println("Contactfound!");      
+    			System.out.println("Contactfound!");   
+    			PrintContact();
    			
     		}
+    		else System.out.println("Contact not found!!");  
     		current=current.next;
     			
     	}
@@ -134,9 +184,11 @@ public boolean delete(T e) {
     		if(((Contact) current.getData()).getPhoneNumber().equalsIgnoreCase(phone)) {
     			L.add(current.data);
     			System.out.println("Contactfound!");      
+    			PrintContact();
     			
     			
     		}
+    		else System.out.println("Contact not found!!");  
     		current=current.next;
     			
     	}
@@ -151,9 +203,11 @@ public boolean delete(T e) {
     	while (current!=null) {
     		if(((Contact) current.getData()).getName().equalsIgnoreCase(name)) {
     			L.add(current.data);
-    			System.out.println("Contactfound!");      
+    			System.out.println("Contactfound!");  
+    			PrintContact();
    			
     		}
+    		else System.out.println("Contact not found!!");  
     		current=current.next;
     			
     	}
@@ -222,6 +276,68 @@ public boolean delete(T e) {
 
 	    return true; // The contact is unique
 	}
+    
+    public void PrintEvent() {
+   	 Node<T> current = head;
+   	 while (current != null) {
+	    	    System.out.println("Event title:"+((Event) current.getData()).getEventTitle() ); 
+	 			System.out.println("Contact Name:"+((Event) current.getData()).getContactName()); 
+	 			System.out.println("Date Time:"+((Event) current.getData()). getDateTime()); 
+	 			System.out.println("Location:"+((Event) current.getData()).getLocation() ); 
+
+	 			
+   		 current=current.next;
+   	 }
+
+		
+	}
+    
+    public LinkedList<T> searchByContactName(String contactname){
+		 LinkedList<T> L =new LinkedList<>();
+		 Node<T> current = head;
+		 while(current!=null) {
+			 if(((Event) current.getData()).getContactName().equalsIgnoreCase(contactname)) {
+				 L.add(current.data);
+				 System.out.println("Event found!"); 
+				 PrintEvent();
+			 }
+			 else  System.out.println("Event Not found!"); 
+			 
+			 current = current.next;
+		 }
+		 return L;
+	 }
+    
+    public LinkedList<T> searchByEventTitle(String Eventtittle){
+		 LinkedList<T> L =new LinkedList<>();
+		 Node<T> current = head;
+		 while(current!=null) {
+			 if(((Event) current.getData()).getEventTitle().equalsIgnoreCase(Eventtittle)) {
+				 L.add(current.data);
+				 System.out.println("Event found!"); 
+				 PrintEvent();
+			 }
+			 else  System.out.println("Event Not found!"); 
+			 
+			 current = current.next;
+		 }
+		 return L;
+	 }
+    
+    public void searchEvent(int criteria) {
+		 Scanner input = new Scanner(System.in);
+		 if(criteria==1) {
+			 System.out.println("Enter the contact's Name:");  
+			 String contactName = input.next();
+			 searchByContactName(contactName);
+		 }
+		 else if(criteria==2) {
+			 System.out.println("Enter the event title:");  
+			 String EventTitle = input.next();
+			 searchByEventTitle(EventTitle);
+		 }
+	 }
+    
 
 	
 	
