@@ -76,27 +76,106 @@ public class PhoneBook <T>{
 	}
 	
 	 public void searchContacts(int criteria) {
-		 
+		 if(contactList.empty())
+			 System.out.println("the Contact List is empty ");
+		 else {
+			 contactList.search(criteria);
+		 }
 	 }
 	 
 	 public void searchEvent(int criteria) {
-		 
+		 if(eventList.empty())
+			 System.out.println("the event List is empty ");
+		 else {eventList.search(criteria);}
+
 	 }
 	 
 	 private  boolean eventConflict(Event newEvent) {
-		return false;
+		 eventList.findFirst();
+		 while(!eventList.last()) {
+		 if(((Event) eventList.retrieve()).getDateTime().equalsIgnoreCase(newEvent.getDateTime())&&((Event) eventList.retrieve()).getContactName().equalsIgnoreCase(newEvent.getContactName()))
+			 return true;
+		 eventList.findNext();
+		 }
+		 if(((Event) eventList.retrieve()).getDateTime().equalsIgnoreCase(newEvent.getDateTime())&&((Event) eventList.retrieve()).getContactName().equalsIgnoreCase(newEvent.getContactName()))
+	      return true;
+		 else return false;
+		 
 		 
 	 }
 	 
+	 private boolean  searchByName (String name ){
+		 contactList.findFirst();
+		 while(!contactList.last()) {
+			 if(((Contact) contactList.retrieve()).getName().equalsIgnoreCase(name))
+			 return true;
+			 contactList.findNext();
+		 }
+		 if(contactList.last())
+			 if(((Contact) contactList.retrieve()).getName().equalsIgnoreCase(name))
+				 return true;
+			  return false;
+	 }
+
+	 
 	 public void scheduleEvent(T event) {
+		 if(eventConflict((Event)event)) {
+			 System.out.println("conflict whith another event ");
+		 return;}
+		 
+		String contactName =((Event)event).getContactName();
+		 if(searchByName(contactName)) {
+			if(eventList.empty()) {
+				eventList.add(event);
+				 System.out.println("Event scheduled successfully!");}
+			else  {
+                eventList.findFirst();
+                if(((Event) eventList.retrieve()).getEventTitle().compareTo(((Event) event).getEventTitle())>0) {
+                    Event NewEvent1 = new Event((Event) eventList.retrieve());
+                    eventList.update(event);
+                    eventList.add((T) NewEvent1);
+                    System.out.println("Event scheduled successfully!");
+
+                }
+                else {
+                    while(!eventList.last()&&((Event) eventList.retrieve()).getEventTitle().compareTo(((Event) event).getEventTitle())>=0) {
+                        eventList.findNext();
+                    }
+                    if(((Event) eventList.retrieve()).getEventTitle().compareTo(((Event) event).getEventTitle())<0) {
+                        Event NewEvent1 = new Event((Event) eventList.retrieve());
+                        eventList.update(event);
+                        eventList.add((T) NewEvent1);
+                        System.out.println("Event scheduled successfully!");
+
+                    }
+                    else {
+                         eventList.add((T) event);
+                            System.out.println("Event scheduled successfully!");
+                    }
+                }
+
+            }
+			
+
+			
+		}
+		
+		else  System.out.println("Contact doesn't ");
+
 		 
 	 }
 	 
 	 public void printContactsByFirstName(String firstName) {
 		 
+		 
 	 }
 	 
 	 public void printAllEventsAlphabetically() {
+		 if(eventList.empty())
+			 System.out.println("event List is empty");
+		 
+		 eventList.PrintEvent();
+		 
 		 
 	 }
 	
