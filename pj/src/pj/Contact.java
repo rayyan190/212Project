@@ -1,6 +1,7 @@
 package pj;
 
 public class Contact implements Comparable<Contact> {
+	LinkedList <Contact> eventList;
 	private String name;
 	private String PhoneNumber;
 	private String eMail;

@@ -59,6 +59,7 @@ public class PhoneBook <T>{
 		while(!contactList.last()){
 			if(((Contact) contactList.retrieve()).getName().equalsIgnoreCase(contactName)) {
 				contactList.remove();
+				removeEventsWithContact(contactName);
 				 System.out.println("Contact deleted successfully!");	
 			}
 			
@@ -71,9 +72,57 @@ public class PhoneBook <T>{
 		}
 		else if(contactList.last()&&!contactList.empty()) {
 			contactList.remove();;
+			removeEventsWithContact(contactName);
+
 			 System.out.println("Contact deleted successfully!");	
 		}
 	}
+	
+	private void removeEventsWithContact(String contactName) {
+    	//bigO(n) or //bigO(n^2) confirm it
+    	if(eventList.empty()) {
+    		System.out.println("The Event List Is empty!!"); 
+    		return;
+    	}
+    	while(!eventList.empty()) {
+    	    		eventList.findFirst();
+    	
+    	if((((Event) eventList.retrieve()).getContactName().equalsIgnoreCase(contactName))) {
+  				eventList.remove();
+  			
+  				eventList.findFirst();
+    	}
+    	
+    		
+    		else if(eventList.last()) {
+    	    		
+ 				if (((Event) eventList.retrieve()).getContactName().equalsIgnoreCase(contactName)) {
+ 					 eventList.remove();
+ 				 }
+ 			}
+    		
+    	}
+     		
+    	
+  	
+     }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	 public void searchContacts(int criteria) {
 		 if(contactList.empty())
@@ -166,8 +215,52 @@ public class PhoneBook <T>{
 	 }
 	 
 	 public void printContactsByFirstName(String firstName) {
-		 
-		 
+		 boolean f = false;
+		    contactList.findFirst();
+		    if(contactList.empty()) {
+		    	System.out.println("No Contact To Search For!!!"); 
+		    }
+		   
+		    else  {
+		    	while (!contactList.last()) {
+		    		
+			        if (  ((Contact) contactList.retrieve()).getName().startsWith(firstName)) {
+			        	
+			            
+			            System.out.println("Name: " + ((Contact) contactList.retrieve()).getName());
+			            System.out.println("Phone Number: " + ((Contact) contactList.retrieve()).getPhoneNumber());
+			            System.out.println("Email Address: " + ((Contact) contactList.retrieve()).geteMail());
+			            System.out.println("Address: " + ((Contact) contactList.retrieve()).getAddres());
+			            System.out.println("Birthday: " + ((Contact) contactList.retrieve()).getBirthday());
+			            System.out.println("Notes: " + ((Contact) contactList.retrieve()).getNotes());
+			            System.out.println();
+			            f=true;
+			        }
+			    
+			        contactList.findNext();
+			    }
+		    	
+		    	 if (contactList.last()) {
+				        if (  ((Contact) contactList.retrieve()).getName().startsWith(firstName)) {
+				        	
+				            
+				            System.out.println("Name: " + ((Contact) contactList.retrieve()).getName());
+				            System.out.println("Phone Number: " + ((Contact) contactList.retrieve()).getPhoneNumber());
+				            System.out.println("Email Address: " + ((Contact) contactList.retrieve()).geteMail());
+				            System.out.println("Address: " + ((Contact) contactList.retrieve()).getAddres());
+				            System.out.println("Birthday: " + ((Contact) contactList.retrieve()).getBirthday());
+				            System.out.println("Notes: " + ((Contact) contactList.retrieve()).getNotes());
+				            System.out.println();
+				            f=true;
+				        }
+		    }
+	 }
+		    if(f==false) {
+		    	System.out.println("Contact Not Found!"); 
+
+		    }
+		    
+		    	
 	 }
 	 
 	 public void printAllEventsAlphabetically() {

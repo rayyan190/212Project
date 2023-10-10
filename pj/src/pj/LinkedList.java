@@ -73,29 +73,7 @@ public class LinkedList <T> {
 	
 	
 	
-   /* public boolean delete(T e) {
-		if(current ==head) {
-			head=head.next;
-		return true;}
-		
-		while (current!=null ) {
-			if(((Contact) current.getData()).getName().equalsIgnoreCase(((Contact) e).getName())) 
-				break;
-				current=current.next;
-			
-		}
-	
-		Node <T> tmp =head;
-		while(tmp.next!=current)
-			tmp=tmp.next;
-		tmp.next=current.next;
-		
-		if(current.next==null)
-			current =head;
-		return true;
-					
-		
-	}*/
+  
 	
 	
 	 public void PrintContact() {
@@ -264,17 +242,17 @@ public class LinkedList <T> {
 	    Node<T> current = head;
 
 	    while (current != null) {
-	        Contact existingContact = (Contact) current.data; // Assuming Contact is the type stored in the list
+	        Contact existingContact = (Contact) current.data; 
 
 	        if (existingContact.getName().equalsIgnoreCase(newContact.getName()) ||
 	            existingContact.getPhoneNumber().equalsIgnoreCase(newContact.getPhoneNumber())) {
-	            return false; // A contact with the same name or phone number already exists
+	            return false;
 	        }
 
 	        current = current.next;
 	    }
 
-	    return true; // The contact is unique
+	    return true;
 	}
     
     public void PrintEvent() {
