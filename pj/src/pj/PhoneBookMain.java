@@ -1,5 +1,6 @@
 package pj;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class PhoneBookMain {
@@ -12,7 +13,7 @@ public class PhoneBookMain {
 		boolean flag = true;
 		
 
-		try {
+		
 			do {
 				System.out.println("Please choose an option:");  
 				System.out.println("1.Add a contact");  
@@ -25,11 +26,21 @@ public class PhoneBookMain {
 				System.out.println("8.Exit"); 
 				System.out.println();
 				System.out.print("Enter your choice:"); 
+				 try {
 				 x = input.nextInt();
+				 if(x>8||x<1) {
+					 System.out.println("inter 1-8"); 
+					 continue;}}catch(InputMismatchException e) {
+						 System.out.println("inter only 1-8");
+						 input.nextLine();
+						 x=0;
+
+					 }
+				 
+
 				 System.out.println(); 
 				 
 				 if(x==1) {
-					 //باقي نزين انه يضيف مرتب هذا اضافه عاديه
 					 System.out.print("Enter the contact's name:");
 					 String name = input.next();
 					 input.nextLine();
@@ -48,7 +59,11 @@ public class PhoneBookMain {
 					 System.out.println(); 
 				 }
 				 
-				 else if(x==2) {
+				 else if(x==2) { 
+					 
+					 int  criteria = 0;
+					 
+					 while(true){
 					 System.out.println("Enter search criteria:"); 
 					 System.out.println("1.Name");  
 					 System.out.println("2.Phone Number");  
@@ -57,11 +72,20 @@ public class PhoneBookMain {
 					 System.out.println("5.Birthday");  
 					 System.out.println(); 
 					 System.out.print("Enter your choice:"); 
-					 int  criteria = input.nextInt();
-					 p.searchContacts(criteria);
-					
 					 
-				 }
+					 
+					 try {
+					  criteria = input.nextInt();
+					  if(criteria <1||criteria>5) {
+						  continue; }
+					  else  { p.searchContacts(criteria);break;}
+					  }catch(InputMismatchException e) {
+						  input.nextLine();
+						  
+					  }
+					}}
+					 
+					 
 				 
 				 else if(x==3) {
 					 System.out.print("Enter the contact's name you want to delete:");
@@ -88,12 +112,13 @@ public class PhoneBookMain {
 					  
 				 }
 				 else if(x==5) {
+					 /////////////////////// repaeat
 					 System.out.println("Enter search criteria:"); 
 					 System.out.println("1.contact name");  
 					 System.out.println("2.Event tittle"); 
 					 System.out.println(); 
 					 System.out.print("Enter your choice:"); 
-					 int  criteria = input.nextInt();
+					 int  criteria = input.nextInt();  // try-catch
 					 p.searchEvent(criteria);
 				 }
 				 
@@ -114,20 +139,14 @@ public class PhoneBookMain {
 				 else if(x==8) {
 					 System.out.println("Goodbye!"); 
 				 }
-				 else
-					 System.out.println("choose from 1-8"); 
+				 
 				
 			}while(x!=8);
 			
 			
 			
 			
-		}catch(Exception e ) {
-			System.out.println("Enter Integer only 1-8");   
 		
-			//flag=false;
-			
-		}
 		
 		
 

@@ -15,7 +15,7 @@ public class PhoneBook <T>{
              System.out.println("Contact added successfully!");
 		}
 		
-		else if (!contactList.isContactUnique((Contact) contact)) {
+		else if (contactList.isContactUnique((Contact) contact)) {
             System.out.println("Contact with the same name or phone number already exists.");
             
         }
@@ -135,7 +135,7 @@ public class PhoneBook <T>{
 	 public void searchEvent(int criteria) {
 		 if(eventList.empty())
 			 System.out.println("the event List is empty ");
-		 else {eventList.search(criteria);}
+		 else {eventList.searchEvent(criteria);}
 
 	 }
 	 
@@ -168,48 +168,55 @@ public class PhoneBook <T>{
 
 	 
 	 public void scheduleEvent(T event) {
-		 if(eventConflict((Event)event)) {
-			 System.out.println("conflict whith another event ");
-		 return;}
+		 if(eventList.empty()) {
+			 eventList.add(event);
+			 System.out.println("Event scheduled successfully!");}
+		 else if(!eventConflict((Event)event)) {
+			 
+			 
+				String contactName =((Event)event).getContactName();
+				 if(searchByName(contactName)) {
+					
+					
+					
+		                eventList.findFirst();
+		                if(((Event) eventList.retrieve()).getEventTitle().compareTo(((Event) event).getEventTitle())>0) {
+		                    Event NewEvent1 = new Event((Event) eventList.retrieve());
+		                    eventList.update(event);
+		                    eventList.add((T) NewEvent1);
+		                    System.out.println("Event scheduled successfully!");
+
+		                }
+		                else {
+		                    while(!eventList.last()&&((Event) eventList.retrieve()).getEventTitle().compareTo(((Event) event).getEventTitle())>=0) {
+		                        eventList.findNext();
+		                    }
+		                    if(((Event) eventList.retrieve()).getEventTitle().compareTo(((Event) event).getEventTitle())<0) {
+		                        Event NewEvent1 = new Event((Event) eventList.retrieve());
+		                        eventList.update(event);
+		                        eventList.add((T) NewEvent1);
+		                        System.out.println("Event scheduled successfully!");
+
+		                    }
+		                    else {
+		                         eventList.add((T) event);
+		                            System.out.println("Event scheduled successfully!");
+		                    }
+		                }
+
+		            
+					
+
+					
+				}
+				
+				else  System.out.println("Contact doesn't ");
+			 }
+			 
 		 
-		String contactName =((Event)event).getContactName();
-		 if(searchByName(contactName)) {
-			if(eventList.empty()) {
-				eventList.add(event);
-				 System.out.println("Event scheduled successfully!");}
-			else  {
-                eventList.findFirst();
-                if(((Event) eventList.retrieve()).getEventTitle().compareTo(((Event) event).getEventTitle())>0) {
-                    Event NewEvent1 = new Event((Event) eventList.retrieve());
-                    eventList.update(event);
-                    eventList.add((T) NewEvent1);
-                    System.out.println("Event scheduled successfully!");
-
-                }
-                else {
-                    while(!eventList.last()&&((Event) eventList.retrieve()).getEventTitle().compareTo(((Event) event).getEventTitle())>=0) {
-                        eventList.findNext();
-                    }
-                    if(((Event) eventList.retrieve()).getEventTitle().compareTo(((Event) event).getEventTitle())<0) {
-                        Event NewEvent1 = new Event((Event) eventList.retrieve());
-                        eventList.update(event);
-                        eventList.add((T) NewEvent1);
-                        System.out.println("Event scheduled successfully!");
-
-                    }
-                    else {
-                         eventList.add((T) event);
-                            System.out.println("Event scheduled successfully!");
-                    }
-                }
-
-            }
-			
-
-			
-		}
+		 
 		
-		else  System.out.println("Contact doesn't ");
+		
 
 		 
 	 }

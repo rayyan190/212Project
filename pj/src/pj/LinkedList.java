@@ -41,7 +41,7 @@ public class LinkedList <T> {
 	public void add (T e) {
 		Node <T> tmp;
 		if(empty())
-			current =head =new Node<T>(e); 
+			current =head =new Node<T>(e);  // cjcljfjhh
 		else {
 		 tmp =current.next;
 		 current.next=new Node<T>(e);
@@ -52,7 +52,7 @@ public class LinkedList <T> {
 		
 	}
 	
-	public void remove () {
+	public void remove () {         // cmckjfjsdflksejf
 		if (current == head) {
 			head = head.next;
 		}
@@ -94,12 +94,12 @@ public class LinkedList <T> {
 
 
 
-    public LinkedList<T> searchByEmail (String email ){
+    public LinkedList<T> searchByEmail (String email ){ 
     	LinkedList<T> L =new LinkedList<>();
     	
     	
     	findFirst();
-    	while (current!=null) {
+    	while (current!=null) {               //nckndsckldnclk
     		if(((Contact) current.getData()).geteMail().equalsIgnoreCase(email)) {
     			L.add(current.data);
     			System.out.println("Contactfound!");    
@@ -118,14 +118,14 @@ public class LinkedList <T> {
     	
     	
     	findFirst();
-    	while (current!=null) {
-    		if(((Contact) current.getData()).getAddres().equalsIgnoreCase(addres)) {
+    	while (current!=null) { 
+    		if(((Contact) current.getData()).getAddres().equalsIgnoreCase(addres)) { //ndsklndsklfnlfknsf
     			L.add(current.data);
     			System.out.println("Contactfound!");  
     			PrintContact();
    			
     		}
-    		else System.out.println("Contact not found!!");  
+    		else System.out.println("Contact not found!!");  // n,mfdsmfklsjf
     			
     		current=current.next;
     			
@@ -138,14 +138,14 @@ public class LinkedList <T> {
     	
     	
     	findFirst();
-    	while (current!=null) {
-    		if(((Contact) current.getData()).getBirthday().equalsIgnoreCase(birthD)) {
+    	while (current!=null) {  
+    		if(((Contact) current.getData()).getBirthday().equalsIgnoreCase(birthD)) { //ljhgiuguigui
     			L.add(current.data);
     			System.out.println("Contactfound!");   
     			PrintContact();
    			
     		}
-    		else System.out.println("Contact not found!!");  
+    		else System.out.println("Contact not found!!");  // mkljdlhjfih
     		current=current.next;
     			
     	}
@@ -159,14 +159,14 @@ public class LinkedList <T> {
     	
     	findFirst();
     	while (current!=null) {
-    		if(((Contact) current.getData()).getPhoneNumber().equalsIgnoreCase(phone)) {
+    		if(((Contact) current.getData()).getPhoneNumber().equalsIgnoreCase(phone)) { //lfjiehfeiofhioew
     			L.add(current.data);
     			System.out.println("Contactfound!");      
     			PrintContact();
     			
     			
     		}
-    		else System.out.println("Contact not found!!");  
+    		else System.out.println("Contact not found!!");   //m;dmv;jsdffp
     		current=current.next;
     			
     	}
@@ -246,13 +246,13 @@ public class LinkedList <T> {
 
 	        if (existingContact.getName().equalsIgnoreCase(newContact.getName()) ||
 	            existingContact.getPhoneNumber().equalsIgnoreCase(newContact.getPhoneNumber())) {
-	            return false;
+	            return true;
 	        }
 
 	        current = current.next;
 	    }
 
-	    return true;
+	    return false;
 	}
     
     public void PrintEvent() {
