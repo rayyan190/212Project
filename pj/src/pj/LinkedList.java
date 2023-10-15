@@ -41,9 +41,10 @@ public class LinkedList <T> {
 	public void add (T e) {
 		Node <T> tmp;
 		if(empty())
-			current =head =new Node<T>(e);  // cjcljfjhh
+			current =head =new Node<T>(e);  // if empty --> first element
+		
 		else {
-		 tmp =current.next;
+		 tmp =current.next;                 // else add it after current 
 		 current.next=new Node<T>(e);
 		 current =current.next;
 		 current.next=tmp;}  
@@ -52,8 +53,8 @@ public class LinkedList <T> {
 		
 	}
 	
-	public void remove () {         // cmckjfjsdflksejf
-		if (current == head) {
+	public void remove () {         
+		if (current == head) {      // just one element 
 			head = head.next;
 		}
 		else {
@@ -65,7 +66,7 @@ public class LinkedList <T> {
 			tmp.next = current.next;
 		}
 
-		if (current.next == null)
+		if (current.next == null)      // set the current to head becuase to the the next is null
 			current = head;
 		else
 			current = current.next;
@@ -102,7 +103,7 @@ public class LinkedList <T> {
     	while (current!=null) {               //nckndsckldnclk
     		if(((Contact) current.getData()).geteMail().equalsIgnoreCase(email)) {
     			L.add(current.data);
-    			System.out.println("Contactfound!");    
+    			System.out.println("Contactfound!");     // if found --> print its info
     			PrintContact();
       			
     		}
@@ -121,11 +122,11 @@ public class LinkedList <T> {
     	while (current!=null) { 
     		if(((Contact) current.getData()).getAddres().equalsIgnoreCase(addres)) { //ndsklndsklfnlfknsf
     			L.add(current.data);
-    			System.out.println("Contactfound!");  
+    			System.out.println("Contactfound!");  // if found --> print its info
     			PrintContact();
    			
     		}
-    		else System.out.println("Contact not found!!");  // n,mfdsmfklsjf
+    		else System.out.println("Contact not found!!");  
     			
     		current=current.next;
     			
@@ -141,11 +142,11 @@ public class LinkedList <T> {
     	while (current!=null) {  
     		if(((Contact) current.getData()).getBirthday().equalsIgnoreCase(birthD)) { //ljhgiuguigui
     			L.add(current.data);
-    			System.out.println("Contactfound!");   
+    			System.out.println("Contactfound!");   //// if found --> print its info
     			PrintContact();
    			
     		}
-    		else System.out.println("Contact not found!!");  // mkljdlhjfih
+    		else System.out.println("Contact not found!!");  
     		current=current.next;
     			
     	}
@@ -161,12 +162,12 @@ public class LinkedList <T> {
     	while (current!=null) {
     		if(((Contact) current.getData()).getPhoneNumber().equalsIgnoreCase(phone)) { //lfjiehfeiofhioew
     			L.add(current.data);
-    			System.out.println("Contactfound!");      
+    			System.out.println("Contactfound!");      //// if found --> print its info
     			PrintContact();
     			
     			
     		}
-    		else System.out.println("Contact not found!!");   //m;dmv;jsdffp
+    		else System.out.println("Contact not found!!");   
     		current=current.next;
     			
     	}
@@ -207,7 +208,7 @@ public class LinkedList <T> {
     
     
     public void search(int criteria){
-    	Scanner input = new Scanner(System.in);
+    	Scanner input = new Scanner(System.in);       // receive the way of searching then implement it
     	if(criteria==1) {
     		 System.out.print("Enter the contact's name:");
     		 String name = input.next();
@@ -241,7 +242,7 @@ public class LinkedList <T> {
     public boolean isContactUnique(Contact newContact) {
 	    Node<T> current = head;
 
-	    while (current != null) {
+	    while (current != null) {            // take the contact then make the comparison--> if Unique return true otherwise false
 	        Contact existingContact = (Contact) current.data; 
 
 	        if (existingContact.getName().equalsIgnoreCase(newContact.getName()) ||
@@ -302,7 +303,7 @@ public class LinkedList <T> {
 		 return L;
 	 }
     
-    public void searchEvent(int criteria) {
+    public void searchEvent(int criteria) {           // receive the way of searching then implement it
 		 Scanner input = new Scanner(System.in);
 		 if(criteria==1) {
 			 System.out.println("Enter the contact's Name:");  

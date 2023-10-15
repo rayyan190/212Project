@@ -112,15 +112,26 @@ public class PhoneBookMain {
 					  
 				 }
 				 else if(x==5) {
-					 /////////////////////// repaeat
+					 while (true) {
 					 System.out.println("Enter search criteria:"); 
 					 System.out.println("1.contact name");  
 					 System.out.println("2.Event tittle"); 
 					 System.out.println(); 
 					 System.out.print("Enter your choice:"); 
-					 int  criteria = input.nextInt();  // try-catch
-					 p.searchEvent(criteria);
-				 }
+					try { int  criteria = input.nextInt(); 
+					if(criteria<1||criteria>2) {
+						 System.out.println("Enter 1 or 2 please"); 
+
+						continue;}
+					else { p.searchEvent(criteria);
+					break;}}catch(InputMismatchException e) {
+						input.nextLine();
+					}
+					}}
+
+						
+					
+				 
 				 
 				 else if(x==6) {
 					 System.out.println("Enter the firstname:");
