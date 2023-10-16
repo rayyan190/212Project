@@ -158,13 +158,19 @@ public class PhoneBook <T>{
 
 	 
 	 public void scheduleEvent(T event) {
+		 if(contactList.empty()) {
+			 System.out.println(" can not schedule becuase there no contact ");
+		 return;}
+		 else {
+
 		//this method will schedule the events sorted in the list based on the event title
-		 if(eventList.empty()) {
+			String contactName =((Event)event).getContactName();
+
+		 if(eventList.empty()&&searchByName(contactName)) {
 			 eventList.add(event);
 			 System.out.println("Event scheduled successfully!");
 			 }
-		 else if(!eventConflict((Event)event)) {
-				String contactName =((Event)event).getContactName();
+		 else if(!eventList.empty()&&!eventConflict((Event)event)) {
 				 if(searchByName(contactName)) {
 		                eventList.findFirst();
 		                if(((Event) eventList.retrieve()).getEventTitle().compareTo(((Event) event).getEventTitle())>0) {
@@ -194,10 +200,11 @@ public class PhoneBook <T>{
 				
 				else  System.out.println("The Contact is not in the list ");
 			 }
+		 
 		 else
 			 System.out.println("Conflict with anther event");  
 	 }
-	 
+	 }
 	 public void printContactsByFirstName(String firstName) {
 		 //this method will print all contacts with the first name given in the parameter if it found 
 		 boolean f = false;
