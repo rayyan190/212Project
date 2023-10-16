@@ -1,4 +1,27 @@
 package pj;
+/*
+
+CLASS: LinkedList.java
+
+CSC212 Data structures - Project phase I
+
+Fall 2023
+
+EDIT DATE:
+
+16-10-2023
+
+TEAM:
+
+team name: my technology.
+
+AUTHORS:
+Rayan Alghamdi. id:443102225
+Mohammed Aleidi.id:443102416
+
+
+
+*/
 
 import java.util.Scanner;
 
