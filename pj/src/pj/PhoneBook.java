@@ -10,19 +10,20 @@ public class PhoneBook <T>{
 	}
 	
 	public void addContact(T contact) {
-		if(contactList.empty()) {
+		//this method will  add the contacts sorted in the list based on the name of the contacts 
+		if(contactList.empty()) { 
 			 contactList.add(contact);
              System.out.println("Contact added successfully!");
 		}
 		
-		else if (contactList.isContactUnique((Contact) contact)) {
+		else if (!contactList.isContactUnique((Contact) contact)) {
             System.out.println("Contact with the same name or phone number already exists.");
             
         }
 		
 		else {
 			contactList.findFirst();
-			if(((Contact) contact).compareTo(((Contact) contactList.retrieve()))<0) {
+			if(((Contact) contact).compareTo(((Contact) contactList.retrieve()))<0) { 
 				Contact NewContact = new Contact((Contact)contactList.retrieve());
 				contactList.update(contact);
 				contactList.add((T) NewContact);
@@ -49,6 +50,7 @@ public class PhoneBook <T>{
 	
 	
 	public void removeContact(String contactName ) {
+		// this method will remove the contact if it found in the list and will remove the contact events if it has any 
 		if( contactList.empty()) {
  	   System.out.println("No contact to delete!!"); 
 		}
@@ -79,7 +81,7 @@ public class PhoneBook <T>{
 	}
 	
 	private void removeEventsWithContact(String contactName) {
-    	//bigO(n) or //bigO(n^2) confirm it
+    	//this method will remove event connected with given contact name in the parameter 
     	if(eventList.empty()) {
     		System.out.println("The Event List Is empty!!"); 
     		return;
@@ -107,39 +109,26 @@ public class PhoneBook <T>{
   	
      }
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	 public void searchContacts(int criteria) {
+		 //this method will search for contacts based on the criteria
 		 if(contactList.empty())
 			 System.out.println("the Contact List is empty ");
 		 else {
-			 contactList.search(criteria);
+			 contactList.searchContacts(criteria);
 		 }
 	 }
 	 
 	 public void searchEvent(int criteria) {
+		 //this method will search for events based on the criteria
 		 if(eventList.empty())
 			 System.out.println("the event List is empty ");
-		 else {eventList.searchEvent(criteria);}
-
+		 else {
+			 eventList.searchEvent(criteria);
+		 }
 	 }
 	 
 	 private  boolean eventConflict(Event newEvent) {
+		 //this method will check that there is no conflict of time and date 
 		 eventList.findFirst();
 		 while(!eventList.last()) {
 		 if(((Event) eventList.retrieve()).getDateTime().equalsIgnoreCase(newEvent.getDateTime())&&((Event) eventList.retrieve()).getContactName().equalsIgnoreCase(newEvent.getContactName()))
@@ -154,6 +143,7 @@ public class PhoneBook <T>{
 	 }
 	 
 	 private boolean  searchByName (String name ){
+		 //this method will search for a contact in the list by name
 		 contactList.findFirst();
 		 while(!contactList.last()) {
 			 if(((Contact) contactList.retrieve()).getName().equalsIgnoreCase(name))
@@ -168,17 +158,14 @@ public class PhoneBook <T>{
 
 	 
 	 public void scheduleEvent(T event) {
+		//this method will schedule the events sorted in the list based on the event title
 		 if(eventList.empty()) {
 			 eventList.add(event);
-			 System.out.println("Event scheduled successfully!");}
+			 System.out.println("Event scheduled successfully!");
+			 }
 		 else if(!eventConflict((Event)event)) {
-			 
-			 
 				String contactName =((Event)event).getContactName();
 				 if(searchByName(contactName)) {
-					
-					
-					
 		                eventList.findFirst();
 		                if(((Event) eventList.retrieve()).getEventTitle().compareTo(((Event) event).getEventTitle())>0) {
 		                    Event NewEvent1 = new Event((Event) eventList.retrieve());
@@ -203,60 +190,34 @@ public class PhoneBook <T>{
 		                            System.out.println("Event scheduled successfully!");
 		                    }
 		                }
-
-		            
-					
-
-					
 				}
 				
-				else  System.out.println("Contact doesn't ");
+				else  System.out.println("The Contact is not in the list ");
 			 }
-			 
-		 
-		 
-		
-		
-
-		 
+		 else
+			 System.out.println("Conflict with anther event");  
 	 }
 	 
 	 public void printContactsByFirstName(String firstName) {
+		 //this method will print all contacts with the first name given in the parameter if it found 
 		 boolean f = false;
 		    contactList.findFirst();
 		    if(contactList.empty()) {
-		    	System.out.println("No Contact To Search For!!!"); 
+		    	System.out.println("No Contact To Search For!"); 
 		    }
-		   
 		    else  {
 		    	while (!contactList.last()) {
 		    		
 			        if (  ((Contact) contactList.retrieve()).getName().startsWith(firstName)) {
-			        	
-			            
-			            System.out.println("Name: " + ((Contact) contactList.retrieve()).getName());
-			            System.out.println("Phone Number: " + ((Contact) contactList.retrieve()).getPhoneNumber());
-			            System.out.println("Email Address: " + ((Contact) contactList.retrieve()).geteMail());
-			            System.out.println("Address: " + ((Contact) contactList.retrieve()).getAddres());
-			            System.out.println("Birthday: " + ((Contact) contactList.retrieve()).getBirthday());
-			            System.out.println("Notes: " + ((Contact) contactList.retrieve()).getNotes());
+			            ((Contact) contactList.retrieve()).PrintContact();
 			            System.out.println();
 			            f=true;
 			        }
-			    
 			        contactList.findNext();
 			    }
-		    	
 		    	 if (contactList.last()) {
 				        if (  ((Contact) contactList.retrieve()).getName().startsWith(firstName)) {
-				        	
-				            
-				            System.out.println("Name: " + ((Contact) contactList.retrieve()).getName());
-				            System.out.println("Phone Number: " + ((Contact) contactList.retrieve()).getPhoneNumber());
-				            System.out.println("Email Address: " + ((Contact) contactList.retrieve()).geteMail());
-				            System.out.println("Address: " + ((Contact) contactList.retrieve()).getAddres());
-				            System.out.println("Birthday: " + ((Contact) contactList.retrieve()).getBirthday());
-				            System.out.println("Notes: " + ((Contact) contactList.retrieve()).getNotes());
+				            ((Contact) contactList.retrieve()).PrintContact();
 				            System.out.println();
 				            f=true;
 				        }
@@ -264,69 +225,17 @@ public class PhoneBook <T>{
 	 }
 		    if(f==false) {
 		    	System.out.println("Contact Not Found!"); 
-
-		    }
-		    
-		    	
+		    }   	
 	 }
 	 
 	 public void printAllEventsAlphabetically() {
+		 //this method will print events ordered alphabetically witch already done in method scheduleEvent
 		 if(eventList.empty())
 			 System.out.println("event List is empty");
 		 
-		 eventList.PrintEvent();
+		 eventList.PrintEvents();
 		 
 		 
 	 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*public void add(T contact ) {
-		if(!ContactList.isContactUnique((Contact) contact))
-			System.out.println("Contact aleardy exist");
-		else {
-			ContactList.add(contact);
-			System.out.println("Contact added successfully!");
-
-		}
-		
-	}
-	
-	public void remove(T e) {
-		if(ContactList.empty())
-			return;
-		
-		if(ContactList.delete(e))	
-			System.out.println("Contact deleted successfully");
-		
-					
-		else System.out.println("Contact Not found");
-
-		
-	}*/
-	
 
 }

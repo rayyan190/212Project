@@ -19,6 +19,14 @@ public class Contact implements Comparable<Contact> {
 		this.notes = notes;
 		
 	}
+    public Contact() {
+    	name="";
+    	PhoneNumber="";
+    	eMail="";
+    	Birthday="";
+    	notes="";
+    	addres="";
+    }
 	
 	public Contact(Contact c ) {
 		this.name = c.name;
@@ -112,13 +120,13 @@ public class Contact implements Comparable<Contact> {
 
 
 
-	public void Print () {
-		System.out.println("Name:"+name); 
-		System.out.println("Phone Number:"+PhoneNumber); 
-		System.out.println("Email Address:"+eMail); 
-		System.out.println("Address:"+addres); 
-		System.out.println("Birthday:"+Birthday); 
-		System.out.println("Notes:"+notes); 
+	public void PrintContact () {
+		System.out.println("Name: "+name); 
+		System.out.println("Phone Number: "+PhoneNumber); 
+		System.out.println("Email Address: "+eMail); 
+		System.out.println("Address: "+addres); 
+		System.out.println("Birthday: "+Birthday); 
+		System.out.println("Notes: "+notes); 
 		
 	}
 	

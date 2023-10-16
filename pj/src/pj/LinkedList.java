@@ -3,8 +3,6 @@ package pj;
 import java.util.Scanner;
 
 public class LinkedList <T> {
-	
-	
 	private Node<T> head;
 	private Node<T> current;
 	
@@ -66,7 +64,7 @@ public class LinkedList <T> {
 			tmp.next = current.next;
 		}
 
-		if (current.next == null)      // set the current to head becuase to the the next is null
+		if (current.next == null)      // set the current to head because to the the next is null
 			current = head;
 		else
 			current = current.next;
@@ -77,119 +75,110 @@ public class LinkedList <T> {
   
 	
 	
-	 public void PrintContact() {
+	 public void PrintContacts() {
     	 Node<T> current = head;
     	 while (current != null) {
-	    	    System.out.println("Name:"+((Contact) current.getData()).getName()); 
-	 			System.out.println("Phone Number:"+((Contact) current.getData()).getPhoneNumber()); 
-	 			System.out.println("Email Address:"+((Contact) current.getData()).geteMail()); 
-	 			System.out.println("Address:"+((Contact) current.getData()).getAddres()); 
-	 			System.out.println("Birthday:"+((Contact) current.getData()).getBirthday()); 
-	 			System.out.println("Notes:"+((Contact) current.getData()).getNotes());
+    		 ((Contact) current.getData()).PrintContact();
     		 current=current.next;
     	 }
 
-		
 	}
+	
 
 
 
 
     public LinkedList<T> searchByEmail (String email ){ 
+    	boolean flag = false;
     	LinkedList<T> L =new LinkedList<>();
-    	
-    	
-    	findFirst();
-    	while (current!=null) {               //nckndsckldnclk
+    	Node<T> current = head;
+    	while (current!=null) {               
     		if(((Contact) current.getData()).geteMail().equalsIgnoreCase(email)) {
     			L.add(current.data);
     			System.out.println("Contactfound!");     // if found --> print its info
-    			PrintContact();
-      			
+    			 ((Contact) current.getData()).PrintContact();
+    			flag = true;
     		}
-    		else  System.out.println("Contact not found!!");  
-    		current=current.next;
-    			
+    		current=current.next;	
     	}
+    	if(flag==false)
+  		  System.out.println("Contact not found!!");  
     	return L;
     }
     
     public LinkedList<T> searchByAddres (String addres ){
+    	boolean flag = false;
     	LinkedList<T> L =new LinkedList<>();
-    	
-    	
-    	findFirst();
+    	Node<T> current = head;
     	while (current!=null) { 
-    		if(((Contact) current.getData()).getAddres().equalsIgnoreCase(addres)) { //ndsklndsklfnlfknsf
+    		if(((Contact) current.getData()).getAddres().equalsIgnoreCase(addres)) { 
     			L.add(current.data);
     			System.out.println("Contactfound!");  // if found --> print its info
-    			PrintContact();
+    			 ((Contact) current.getData()).PrintContact();
+    			flag = true;
    			
     		}
-    		else System.out.println("Contact not found!!");  
-    			
     		current=current.next;
     			
     	}
+    	if(flag==false)
+    		 System.out.println("Contact not found!!");  
     	return L;
     }
     
     public LinkedList<T> searchByBirthday (String birthD ){
+    	boolean flag = false;
     	LinkedList<T> L =new LinkedList<>();
-    	
-    	
-    	findFirst();
+        Node<T> current = head;
     	while (current!=null) {  
-    		if(((Contact) current.getData()).getBirthday().equalsIgnoreCase(birthD)) { //ljhgiuguigui
+    		if(((Contact) current.getData()).getBirthday().equalsIgnoreCase(birthD)) {
     			L.add(current.data);
     			System.out.println("Contactfound!");   //// if found --> print its info
-    			PrintContact();
-   			
-    		}
-    		else System.out.println("Contact not found!!");  
+    			 ((Contact) current.getData()).PrintContact();
+    			flag = true;
+    		} 
     		current=current.next;
-    			
     	}
+    	if(flag==false)
+    		 System.out.println("Contact not found!!");  
     	return L;
     }
     
     
     public LinkedList<T> searchByPhoneNum (String phone ){
+    	boolean flag = false;
     	LinkedList<T> L =new LinkedList<>();
-    	
-    	
-    	findFirst();
+    	Node<T> current = head;
     	while (current!=null) {
-    		if(((Contact) current.getData()).getPhoneNumber().equalsIgnoreCase(phone)) { //lfjiehfeiofhioew
+    		if(((Contact) current.getData()).getPhoneNumber().equalsIgnoreCase(phone)) { 
     			L.add(current.data);
     			System.out.println("Contactfound!");      //// if found --> print its info
-    			PrintContact();
-    			
-    			
+    			 ((Contact) current.getData()).PrintContact();
+    			flag = true;
     		}
-    		else System.out.println("Contact not found!!");   
-    		current=current.next;
-    			
+    		current=current.next;	
     	}
+    	if(flag==false)
+    		 System.out.println("Contact not found!!");  
     	return L;
     }
     
+    
     public LinkedList<T> searchByName (String name ){
+    	boolean flag = false;
     	LinkedList<T> L =new LinkedList<>();
-    	
-    	
-    	findFirst();
+    	Node<T> current = head;
     	while (current!=null) {
     		if(((Contact) current.getData()).getName().equalsIgnoreCase(name)) {
     			L.add(current.data);
     			System.out.println("Contactfound!");  
-    			PrintContact();
-   			
+    			 ((Contact) current.getData()).PrintContact();
+    			flag = true;
     		}
-    		else System.out.println("Contact not found!!");  
-    		current=current.next;
-    			
+    		current=current.next;	
     	}
+    	if(flag==false)
+    		 System.out.println("Contact not found!!");  
     	return L;
     }
     
@@ -197,7 +186,7 @@ public class LinkedList <T> {
     public boolean searchByNamePhone (String name, String phone ){
     	boolean flag=false;
     	                               
-    	findFirst();
+        Node<T> current = head;
     	while (current!=null) {
     		if(((Contact) current.getData()).getPhoneNumber().equalsIgnoreCase(phone)|| ((Contact) current.getData()).getName().equalsIgnoreCase(name))
     		flag =true;
@@ -207,20 +196,18 @@ public class LinkedList <T> {
     }
     
     
-    public void search(int criteria){
+    public void searchContacts(int criteria){
     	Scanner input = new Scanner(System.in);       // receive the way of searching then implement it
     	if(criteria==1) {
     		 System.out.print("Enter the contact's name:");
-    		 String name = input.next();
-    		   
-    		searchByName (name);
+    		 String name = input.nextLine();
+    		 searchByName (name);
     	}
     	else if(criteria==2) {
     		 System.out.print("Enter the contact's phone number:"); 
     		 String phoneNumber = input.next();
     		 searchByPhoneNum (phoneNumber);
     	}
-    	
     	else if(criteria==3) {
     		 System.out.print("Enter the contact's email address:"); 
     		 String emailAddress = input.next();
@@ -228,12 +215,12 @@ public class LinkedList <T> {
     	}
     	else if(criteria==4) {
     		 System.out.print("Enter the contact's address: "); 
-    		 String address = input.next();
+    		 String address = input.nextLine();
     		searchByAddres (address );
     	}
     	else if(criteria==5) {
     		 System.out.print("Enter the contact's birthday:"); 
-    		 String birthday = input.next();
+    		 String birthday = input.nextLine();
     		searchByBirthday (birthday);
     	}
     }
@@ -241,65 +228,61 @@ public class LinkedList <T> {
 
     public boolean isContactUnique(Contact newContact) {
 	    Node<T> current = head;
-
 	    while (current != null) {            // take the contact then make the comparison--> if Unique return true otherwise false
-	        Contact existingContact = (Contact) current.data; 
-
-	        if (existingContact.getName().equalsIgnoreCase(newContact.getName()) ||
-	            existingContact.getPhoneNumber().equalsIgnoreCase(newContact.getPhoneNumber())) {
-	            return true;
+	        if ( ((Contact) current.getData()).getName().equalsIgnoreCase(newContact.getName()) || 
+	        		((Contact) current.getData()).getPhoneNumber().equalsIgnoreCase(newContact.getPhoneNumber())) {
+	            return false;
 	        }
-
 	        current = current.next;
 	    }
-
-	    return false;
+	    return true;
 	}
     
-    public void PrintEvent() {
+    public void PrintEvents() {
    	 Node<T> current = head;
    	 while (current != null) {
-	    	    System.out.println("Event title:"+((Event) current.getData()).getEventTitle() ); 
-	 			System.out.println("Contact Name:"+((Event) current.getData()).getContactName()); 
-	 			System.out.println("Date Time:"+((Event) current.getData()). getDateTime()); 
-	 			System.out.println("Location:"+((Event) current.getData()).getLocation() ); 
-
-	 			
+   		((Event) current.getData()).PrintEvent();
    		 current=current.next;
    	 }
 
 		
 	}
     
+   
+    
     public LinkedList<T> searchByContactName(String contactname){
+    	boolean flag = false;
 		 LinkedList<T> L =new LinkedList<>();
 		 Node<T> current = head;
 		 while(current!=null) {
 			 if(((Event) current.getData()).getContactName().equalsIgnoreCase(contactname)) {
 				 L.add(current.data);
 				 System.out.println("Event found!"); 
-				 PrintEvent();
+				 ((Event) current.getData()).PrintEvent();
+				 flag = true;
 			 }
-			 else  System.out.println("Event Not found!"); 
-			 
 			 current = current.next;
 		 }
+		 if(flag==false)
+			 System.out.println("Event Not found!"); 
 		 return L;
 	 }
     
     public LinkedList<T> searchByEventTitle(String Eventtittle){
+    	boolean flag = false;
 		 LinkedList<T> L =new LinkedList<>();
 		 Node<T> current = head;
 		 while(current!=null) {
 			 if(((Event) current.getData()).getEventTitle().equalsIgnoreCase(Eventtittle)) {
 				 L.add(current.data);
 				 System.out.println("Event found!"); 
-				 PrintEvent();
-			 }
-			 else  System.out.println("Event Not found!"); 
-			 
+				 ((Event) current.getData()).PrintEvent();
+				 flag = true;
+			 }			 
 			 current = current.next;
 		 }
+		 if(flag==false)
+			 System.out.println("Event Not found!");
 		 return L;
 	 }
     
@@ -307,12 +290,12 @@ public class LinkedList <T> {
 		 Scanner input = new Scanner(System.in);
 		 if(criteria==1) {
 			 System.out.println("Enter the contact's Name:");  
-			 String contactName = input.next();
+			 String contactName = input.nextLine();
 			 searchByContactName(contactName);
 		 }
 		 else if(criteria==2) {
 			 System.out.println("Enter the event title:");  
-			 String EventTitle = input.next();
+			 String EventTitle = input.nextLine();
 			 searchByEventTitle(EventTitle);
 		 }
 	 }

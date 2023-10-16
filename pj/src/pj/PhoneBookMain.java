@@ -42,18 +42,22 @@ public class PhoneBookMain {
 				 
 				 if(x==1) {
 					 System.out.print("Enter the contact's name:");
-					 String name = input.next();
 					 input.nextLine();
+					 String name = input.nextLine();
 					 System.out.print("Enter the contact's phone number:"); 
 					 String phoneNumber = input.next();
 					 System.out.print("Enter the contact's email address:"); 
 					 String emailAddress = input.next();
+					 
 					 System.out.print("Enter the contact's address: "); 
-					 String address = input.next();
+					 input.nextLine();
+					 String address =  input.nextLine();
 					 System.out.print("Enter the contact's birthday:"); 
 					 String birthday = input.next();
 					 System.out.print("Enter any notes for the contact: "); 
-					 String notes = input.next();
+					 input.nextLine();
+					 String notes =  input.nextLine();
+				
 					 Contact NewContact = new Contact(name,phoneNumber,emailAddress,address,birthday,notes);
 					 p.addContact((T) NewContact);
 					 System.out.println(); 
@@ -72,6 +76,7 @@ public class PhoneBookMain {
 					 System.out.println("5.Birthday");  
 					 System.out.println(); 
 					 System.out.print("Enter your choice:"); 
+					
 					 
 					 
 					 try {
@@ -89,24 +94,27 @@ public class PhoneBookMain {
 				 
 				 else if(x==3) {
 					 System.out.print("Enter the contact's name you want to delete:");
-					 String name = input.next();
 					 input.nextLine();
+					 String name =  input.nextLine();
 					 p.removeContact(name);
 				 }
 				 
 				 else if(x==4) {
 					 System.out.print("Enter event title:");
-					 String eventTitle = input.next();
 					 input.nextLine();
+					 String eventTitle = input.nextLine();
+					 
 					 System.out.print("Enter contact name:");  
-					 String ContactName = input.next();
+					 input.nextLine();
+					 String ContactName =input.nextLine();
 					 input.nextLine();
 					 System.out.print("Enter event date and time (MM/DD/YYYY HH:MM):");  
 					 String dateTime = input.next();
 					 input.nextLine();
 					 System.out.print("Enter event location:");  
-					 String location = input.next();
 					 input.nextLine();
+					 String location = input.nextLine();
+					// input.nextLine();
 					 Event NewEvent = new Event(eventTitle,ContactName,dateTime,location);
 					 p.scheduleEvent((T) NewEvent);
 					  
@@ -155,12 +163,6 @@ public class PhoneBookMain {
 			}while(x!=8);
 			
 			
-			
-			
-		
-		
-		
-
 	}
 
 }

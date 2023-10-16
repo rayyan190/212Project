@@ -6,7 +6,7 @@ public class Event {
 	 private String ContactName;
 	 private String dateTime;
 	 private String location;
-	 private Contact contact;
+
 	 
 	 public Event(String eventTitle, String ContactName, String dateTime, String location) {
 	  this.eventTitle = eventTitle;
@@ -21,6 +21,13 @@ public class Event {
 		  this.ContactName = e.ContactName;
 		  this.dateTime = e.dateTime;
 		  this.location = e.location;
+		 
+	 }
+	 public Event() {
+		 eventTitle="";
+		 ContactName="";
+		 dateTime="";
+		 location="";
 		 
 	 }
 	 public String getEventTitle() {
@@ -47,11 +54,13 @@ public class Event {
 	 public void setLocation(String location) {
 	  this.location = location;
 	 }
-	 public Contact getContact() {
-	  return contact;
-	 }
-	 public void setContact(Contact contact) {
-	  this.contact = contact;
+	
+	 
+	 public void PrintEvent() {
+		 System.out.println("Event title: "+eventTitle); 
+	     System.out.println("Contact Name: "+ContactName); 
+	     System.out.println("Date Time: "+dateTime); 
+		 System.out.println("Location: "+location ); 
 	 }
 
 }
