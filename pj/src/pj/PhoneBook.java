@@ -180,13 +180,13 @@ public class PhoneBook <T>{
 	 }
 
 	 
-	 public void scheduleEvent(T event) {
+	 public void scheduleEvent(T event) { //this method will schedule the events sorted in the list based on the event title
+
 		 if(contactList.empty()) {
 			 System.out.println(" can not schedule becuase there no contact ");
 		 return;}
 		 else {
 
-		//this method will schedule the events sorted in the list based on the event title
 			String contactName =((Event)event).getContactName();
 
 		 if(eventList.empty()&&searchByName(contactName)) {
