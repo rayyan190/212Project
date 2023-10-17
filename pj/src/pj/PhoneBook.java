@@ -152,6 +152,10 @@ public class PhoneBook <T>{
 	 
 	 private  boolean eventConflict(Event newEvent) {
 		 //this method will check that there is no conflict of time and date 
+		 if(eventList.empty())
+			 return false;
+		 else {
+		 
 		 eventList.findFirst();
 		 while(!eventList.last()) {
 		 if(((Event) eventList.retrieve()).getDateTime().equalsIgnoreCase(newEvent.getDateTime())&&((Event) eventList.retrieve()).getContactName().equalsIgnoreCase(newEvent.getContactName()))
@@ -160,7 +164,8 @@ public class PhoneBook <T>{
 		 }
 		 if(((Event) eventList.retrieve()).getDateTime().equalsIgnoreCase(newEvent.getDateTime())&&((Event) eventList.retrieve()).getContactName().equalsIgnoreCase(newEvent.getContactName()))
 	      return true;
-		 else return false;
+		 }
+		  return false;
 		 
 		 
 	 }
@@ -176,24 +181,22 @@ public class PhoneBook <T>{
 		 if(contactList.last())
 			 if(((Contact) contactList.retrieve()).getName().equalsIgnoreCase(name))
 				 return true;
+			 
 			  return false;
 	 }
 
 	 
 	 public void scheduleEvent(T event) { //this method will schedule the events sorted in the list based on the event title
-
 		 if(contactList.empty()) {
 			 System.out.println(" can not schedule becuase there no contact ");
-		 return;}
+		 }
 		 else {
-
 			String contactName =((Event)event).getContactName();
-
 		 if(eventList.empty()&&searchByName(contactName)) {
 			 eventList.add(event);
 			 System.out.println("Event scheduled successfully!");
 			 }
-		 else if(!eventList.empty()&&!eventConflict((Event)event)) {
+		 else if(!eventConflict((Event)event)) {
 				 if(searchByName(contactName)) {
 		                eventList.findFirst();
 		                if(((Event) eventList.retrieve()).getEventTitle().compareTo(((Event) event).getEventTitle())>0) {
@@ -201,7 +204,6 @@ public class PhoneBook <T>{
 		                    eventList.update(event);
 		                    eventList.add((T) NewEvent1);
 		                    System.out.println("Event scheduled successfully!");
-
 		                }
 		                else {
 		                    while(!eventList.last()&&((Event) eventList.retrieve()).getEventTitle().compareTo(((Event) event).getEventTitle())>=0) {
@@ -212,7 +214,6 @@ public class PhoneBook <T>{
 		                        eventList.update(event);
 		                        eventList.add((T) NewEvent1);
 		                        System.out.println("Event scheduled successfully!");
-
 		                    }
 		                    else {
 		                         eventList.add((T) event);
@@ -220,10 +221,8 @@ public class PhoneBook <T>{
 		                    }
 		                }
 				}
-				
 				else  System.out.println("The Contact is not in the list ");
 			 }
-		 
 		 else
 			 System.out.println("Conflict with anther event");  
 	 }
@@ -234,6 +233,7 @@ public class PhoneBook <T>{
 		    contactList.findFirst();
 		    if(contactList.empty()) {
 		    	System.out.println("No Contact To Search For!"); 
+		    	return;
 		    }
 		    else  {
 		    	while (!contactList.last()) {

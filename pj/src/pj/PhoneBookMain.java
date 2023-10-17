@@ -23,6 +23,9 @@ Mohammed Aleidi.id:443102416
 
 */
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -71,12 +74,15 @@ public class PhoneBookMain {
 					 String phoneNumber = input.next();
 					 System.out.print("Enter the contact's email address:"); 
 					 String emailAddress = input.next();
-					 
 					 System.out.print("Enter the contact's address: "); 
 					 input.nextLine();
 					 String address =  input.nextLine();
-					 System.out.print("Enter the contact's birthday:"); 
+					 System.out.print("Enter the contact's birthday (YYYY/MM/DD):"); 
 					 String birthday = input.next();
+					 if(!isValidDate(birthday)) {
+				     System.out.print("Enter again correctly"); 
+					 birthday = input.next();
+					 }
 					 System.out.print("Enter any notes for the contact: "); 
 					 input.nextLine();
 					 String notes =  input.nextLine();
@@ -106,12 +112,17 @@ public class PhoneBookMain {
 					  criteria = input.nextInt();
 					  if(criteria <1||criteria>5) {
 						  continue; }
-					  else  { p.searchContacts(criteria);break;}
+					  else  { 
+						  p.searchContacts(criteria);
+						  System.out.println();    
+						  break;
+						  }
 					  }catch(InputMismatchException e) {
 						  input.nextLine();
 						  
 					  }
-					}}
+					}
+					 }
 					 
 					 
 				 
@@ -120,28 +131,30 @@ public class PhoneBookMain {
 					 input.nextLine();
 					 String name =  input.nextLine();
 					 p.removeContact(name);
+					 System.out.println();    
 				 }
 				 
 				 else if(x==4) {
+					 String format = "YYYY/MM/DD/HH:MM";
 					 System.out.print("Enter event title:");
 					 input.nextLine();
-					 String eventTitle = input.next();
-					 
-					 System.out.print("Enter contact name:");  
+					 String eventTitle = input.nextLine();
+					 System.out.print("Enter contact name:"); 
+					 String ContactName =input.nextLine();
 					 input.nextLine();
-					 String ContactName =input.next();
-					 
-					 System.out.print("Enter event date and time (MM/DD/YYYY HH:MM):");  
-					 input.nextLine();
-					 String dateTime = input.next();
-					 
+					 System.out.print("Enter event date and time (YYYY/MM/DD/HH:MM):");  
+					 String dateTime =  input.next();
+					 if(!isDateTimeValid(dateTime,format)) {
+				     System.out.print("Enter again correctly");  
+					 dateTime = input.next();
+					 }
 					 System.out.print("Enter event location:");  
 					 input.nextLine();
-					 String location = input.next();
+					 String location = input.nextLine();
 					 
-					// input.nextLine();
 					 Event NewEvent = new Event(eventTitle,ContactName,dateTime,location);
 					 p.scheduleEvent((T) NewEvent);
+					 System.out.println();        
 					  
 				 }
 				 else if(x==5) {
@@ -156,11 +169,16 @@ public class PhoneBookMain {
 						 System.out.println("Enter 1 or 2 please"); 
 
 						continue;}
-					else { p.searchEvent(criteria);
-					break;}}catch(InputMismatchException e) {
+					else { 
+						p.searchEvent(criteria);
+						System.out.println();    
+					    break;
+					}
+					}catch(InputMismatchException e) {
 						input.nextLine();
 					}
-					}}
+					}
+					 }
 
 						
 					
@@ -172,6 +190,7 @@ public class PhoneBookMain {
 			
 					 input.nextLine();
 					 p.printContactsByFirstName(firstName);
+					 System.out.println();    
 					 //input.nextLine();
 
 
@@ -179,6 +198,7 @@ public class PhoneBookMain {
 				 
 				 else if(x==7) {
 					 p.printAllEventsAlphabetically();
+					 System.out.println();    
 				 }
 				 else if(x==8) {
 					 System.out.println("Goodbye!"); 
@@ -189,5 +209,69 @@ public class PhoneBookMain {
 			
 			
 	}
+	
+	public static boolean isValidDate(String Date) {
+	   
+	    String[] date = Date.split("-");
+	    if (date.length != 3) {
+	        return false; 
+	    }
+
+	    try {
+	        int year = Integer.parseInt(date[0]);
+	        int month = Integer.parseInt(date[1]);
+	        int day = Integer.parseInt(date[2]);
+
+	        
+	        if (year < 1 || month < 1 || month > 12 || day < 1 || day > 31) {
+	            return false; 
+	        }
+
+	       
+	        if (month == 4 || month == 6 || month == 9 || month == 11) {
+	            if (day > 30) {
+	                return false; 
+	            }
+	        } else if (month == 2) {
+	           
+	            if (day > 28) {
+	                return false; 
+	            }
+	        }
+
+	        return true;
+	    } catch (NumberFormatException e) {
+	        return false; 
+	    }
+	}
+	
+	
+	
+    public static boolean isDateTimeValid(String dateTime, String format) {
+        try {
+            SimpleDateFormat d = new SimpleDateFormat(format);
+            d.setLenient(false);
+
+            Date Date = d.parse(dateTime);
+
+            if (Date != null) {
+               
+                return true;
+            }
+        } catch (ParseException e) {
+           
+        }
+
+        return false;
+    }
+
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
